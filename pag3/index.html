@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header img {
+            height: 50px;
+        }
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-image {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+        .question {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .options button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .options button:hover {
+            background-color: #555;
+        }
+        .options button.selected {
+            background-color: #a00000; /* Cor vermelho Flamengo */
+            color: white;
+        }
+        .rating {
+            margin: 20px 0;
+        }
+        .rating i {
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .rating i:hover, .rating i.selected {
+            color: gold;
+        }
+        .next-button {
+            margin-top: 20px;
+        }
+        .next-button a {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #002168;
+            color: white;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .next-button a:hover {
+            background-color: #218838;
+        }
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo">
+        <i class="fa fa-bars menu-icon"></i>
+    </header>
+    <div class="container">
+        <img src="imagem.jpg" alt="Imagem do Quiz" class="quiz-image">
+        <div class="question">
+            <p>Em uma escala de 0 a 5, o quanto você valoriza a história do Mengão?</p>
+            <div class="rating">
+                <i class="fa fa-star" data-value="1"></i>
+                <i class="fa fa-star" data-value="2"></i>
+                <i class="fa fa-star" data-value="3"></i>
+                <i class="fa fa-star" data-value="4"></i>
+                <i class="fa fa-star" data-value="5"></i>
+            </div>
+        </div>
+        <div class="question">
+            <p>Quantas vezes o Mengão conquistou a Libertadores?</p>
+            <div class="options">
+                <button>3 vezes</button>
+                <button>6 vezes</button>
+            </div>
+        </div>
+        <div class="question">
+            <p>Qual jogador é conhecido como "Rei do Flamengo"?</p>
+            <div class="options">
+                <button>Zico</button>
+                <button>Gabigol</button>
+            </div>
+            <br>
+        </div>
+        <div class="next-button">
+            <a href="../pag4/index.html">Próximo</a>
+        </div>
+    </div>
+    <audio autoplay loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        document.querySelectorAll('.rating i').forEach(star => {
+            star.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                document.querySelectorAll('.rating i').forEach(s => s.classList.remove('selected'));
+                for (let i = 0; i < value; i++) {
+                    document.querySelectorAll('.rating i')[i].classList.add('selected');
+                }
+            });
+        });
+
+        document.querySelectorAll('.options button').forEach(button => {
+            button.addEventListener('click', function() {
+                const buttons = this.parentElement.querySelectorAll('button');
+                buttons.forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
